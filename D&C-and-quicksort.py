@@ -1,3 +1,4 @@
+import random
 # using recursion to make sum function:
 def sum(l):
     if l == []:
@@ -36,11 +37,12 @@ print(max([1, 4, 7]))
 def quick_sort(arr):
     if len(arr) < 2:
         return arr
-    pivot = arr[0]
-    less = [i for i in arr[1:] if i <= pivot]
-    more = [i for i in arr[1:] if i > pivot]
+    pivot = arr[random.randint(0,len(arr)-1)]
+    less = [i for i in arr[0:] if i < pivot]
+    equal = [i for i in arr if i == pivot]
+    more = [i for i in arr[0:] if i > pivot]
 
-    return quick_sort(less) + [pivot] + quick_sort(more)
+    return quick_sort(less) + equal + quick_sort(more)
 
-l = [6,3,4,8,10,2]
+l = [6,3,4,8,8,10,2]
 print (quick_sort(l))
