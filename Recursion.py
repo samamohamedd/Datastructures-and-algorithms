@@ -21,6 +21,16 @@ def factorial3(n, acc= 1):
     return factorial3(n-1 , (n*acc))
 
 
+l = [0,1]
+def fibonacci(n):
+    if len(l) >= n:
+        return l[n-1]
+    l.append(l[len(l)-1] + l[len(l)-2])
+    return fibonacci(n)
+
+print(fibonacci(6))
+
 print (factorial(6)) 
 print (factorial2(6)) 
 print (factorial3(6)) 
+
