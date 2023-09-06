@@ -15,6 +15,7 @@ for subject, mark in marks.items():
 
 # print (marks.keys())
 # =============================================================================
+
 import string
 
 fname = input("Enter file name ")
@@ -37,3 +38,17 @@ for line in myfile:  # type: ignore
 
 print(count)
 print(max(count.values()))
+
+#=====================================================================
+
+# trying the get function
+# hashtables is so fast and useful here ,this method would have been so slow if using a list
+voted = {}
+def check_vote(name):
+    if voted.get(name):
+        print('voted before')
+    else:
+        voted[name] = True
+        print('all good')
+
+check_vote('sara')
