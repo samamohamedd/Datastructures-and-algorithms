@@ -1,3 +1,4 @@
+from collections import deque
 class node:
     def __init__(self, value) -> None:
         self.value = value
@@ -83,17 +84,47 @@ class BinaryTree:
                     if curr.right.left is None: # if the right child doesn't have left
                         if parent is None:
                             self.root = curr.left
-                        if curr.value > parent.value:
-                            parent.right = curr.left
-                            break
-                        elif curr.value < parent.value:
-                            parent.left = curr.left
-                            break
-                    else: # if the right child have lefts
+                        else:
+                            if curr.value > parent.value:
+                                parent.right = curr.left
+                                break
+                            if curr.value < parent.value:
+                                parent.left = curr.left
+                                break
+                    elif parent: # if the right child have lefts
                         parent.right = curr.right
                         curr.right.left = l
                         break
                         
+    def BreadthFirstSearch(self):
+        curr = self.root 
+        answer = []
+        queue : deque = deque()
+        queue.append(curr)
+
+        while len(queue) > 0:
+            curr = queue.popleft()
+            answer.append(curr.value)
+
+            if curr.left:
+                queue.append(curr.left)
+
+            if curr.right:
+                queue.append(curr.right)    
+        return answer
+
+    def BreadthFirstSearchR(self, queue, ans):
+        if len(queue) == 0:
+            return ans
+        curr = queue.pop(0)
+        ans.append(curr.value)
+        if curr.left:
+            queue.append(curr.left)
+        if curr.right:
+            queue.append(curr.right)
+        return self.BreadthFirstSearchR(queue,ans)
+
+
 
 tree = BinaryTree()
 tree.insert(9)
@@ -102,6 +133,10 @@ tree.insert(6)
 tree.insert(15)
 tree.insert(90)
 
+tree.BreadthFirstSearch()
+print(tree.BreadthFirstSearchR([tree.root], []))
+
+tree.remove(4)
 tree.lookup(4)
 tree.lookup(8)
 tree.lookup(15)
